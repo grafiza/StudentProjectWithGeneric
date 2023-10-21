@@ -25,11 +25,6 @@ public class Runner {
             System.out.println("8. Öğretmen Güncelle");
             System.out.println("9. Öğretmen Sil");
             System.out.println("10. Öğretmen Getir");
-            System.out.println("11. Sınıf Ekle");
-            System.out.println("12. Sınıf Listele");
-            System.out.println("13. Sınıf Güncelle");
-            System.out.println("14. Sınıf Sil");
-            System.out.println("15. Sınıf Getir");
             System.out.println("0. Çıkış");
 
             select = scan.nextInt();
