@@ -62,8 +62,6 @@ public class TeacherRepo implements Repository<Teacher> {
             }
         }
         return teacher;
-
-
     }
 
     @Override
@@ -76,7 +74,6 @@ public class TeacherRepo implements Repository<Teacher> {
             System.out.println("-".repeat(40));
             System.out.printf("%-3s %-13s %-13s %-13s \n", "id", "Adı", "Soyadı", "Branşı");
             while (rs.next()) {
-
                 System.out.printf("%-3s %-13s %-13s %-13s\n",
                         rs.getInt("teacherid"),
                         rs.getString("name"),
@@ -93,7 +90,6 @@ public class TeacherRepo implements Repository<Teacher> {
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
             }
-
         }
         System.out.println("Devam etmek için bir tuşa basın");
         scan.nextLine();

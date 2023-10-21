@@ -5,18 +5,15 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class StudentRepo implements Repository<Student> {
-
     DbProcess db = new DbProcess();
-    Scanner scan=new Scanner(System.in);
+    Scanner scan = new Scanner(System.in);
 
     @Override
     public void save(Student object) {
-
         db.setConnection();
         String query = "insert into t_student1 (name,lastname,city,age) values(?,?,?,?)";
         db.setPreparedStatement(query);
         PreparedStatement ps = db.getPs();
-
         try {
             ps.setString(1, object.getName());
             ps.setString(2, object.getLastname());
@@ -34,17 +31,15 @@ public class StudentRepo implements Repository<Student> {
                 System.out.println(e.getMessage());
             }
         }
-
     }
 
     @Override
     public Student findById(int id) {
-
-        Student student=null;
+        Student student = null;
         db.setConnection();
         String sql = "select * from t_student1 where studentId=?";
         db.setPreparedStatement(sql);
-        PreparedStatement ps=db.getPs();
+        PreparedStatement ps = db.getPs();
         try {
             ps.setInt(1, id);
             ResultSet resultSet = ps.executeQuery();
@@ -72,23 +67,21 @@ public class StudentRepo implements Repository<Student> {
 
     @Override
     public void findAll() {
-        db.setConnection();String query = "Select * from t_student1";
+        db.setConnection();
+        String query = "Select * from t_student1";
         db.setStatement();
 
         try {
             ResultSet rs = db.getSt().executeQuery(query);
             System.out.println("-".repeat(50));
-            System.out.printf("%-3s %-13s %-13s %-13s %-5s\n","id","Adı","Soyadı","Şehir","Yaş");
+            System.out.printf("%-3s %-13s %-13s %-13s %-5s\n", "id", "Adı", "Soyadı", "Şehir", "Yaş");
             while (rs.next()) {
-
                 System.out.printf("%-3s %-13s %-13s %-13s %-5s\n",
                         rs.getInt("studentId"),
                         rs.getString("name"),
                         rs.getString("lastname"),
                         rs.getString("city"),
                         rs.getInt("age"));
-
-
             }
             System.out.println("-".repeat(50));
 
@@ -101,32 +94,29 @@ public class StudentRepo implements Repository<Student> {
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
             }
-
         }
         System.out.println("Devam etmek için bir tuşa basın");
         scan.nextLine();
-
     }
 
     @Override
     public void update(Student foundStudent) {
-
         db.setConnection();
-        String sql="update t_student1 set name=?,lastname=?,city=?,age=? where studentId=?";
+        String sql = "update t_student1 set name=?,lastname=?,city=?,age=? where studentId=?";
         db.setPreparedStatement(sql);
-        PreparedStatement ps=db.getPs();
+        PreparedStatement ps = db.getPs();
         try {
-            ps.setString(1,foundStudent.getName());
-            ps.setString(2,foundStudent.getLastname());
-            ps.setString(3,foundStudent.getCity());
-            ps.setInt(4,foundStudent.getAge());
-            ps.setInt(5,foundStudent.getId());
-            int updated= ps.executeUpdate();
-            if(updated>0)
+            ps.setString(1, foundStudent.getName());
+            ps.setString(2, foundStudent.getLastname());
+            ps.setString(3, foundStudent.getCity());
+            ps.setInt(4, foundStudent.getAge());
+            ps.setInt(5, foundStudent.getId());
+            int updated = ps.executeUpdate();
+            if (updated > 0)
                 System.out.println("Güncelleme İşlemi Başarılı");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-        }finally {
+        } finally {
             try {
                 ps.close();
                 db.getCon().close();
@@ -141,7 +131,7 @@ public class StudentRepo implements Repository<Student> {
         db.setConnection();
         String query = "DELETE FROM t_student1 where studentId=?";
         db.setPreparedStatement(query);
-        PreparedStatement ps=db.getPs();
+        PreparedStatement ps = db.getPs();
         try {
             ps.setInt(1, id);
             int deleted = ps.executeUpdate();
@@ -162,7 +152,6 @@ public class StudentRepo implements Repository<Student> {
     }
 
     public void createStudentTable() {
-
         db.setConnection();
         db.setStatement();
         try {

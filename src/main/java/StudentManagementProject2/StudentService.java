@@ -26,11 +26,9 @@ public class StudentService {
     public void getAllStudent() {
         stRepo.findAll();
     }
-
     public void deleteStudent(int id) {
         stRepo.delete(id);
     }
-
     public void displayStudent(int id) {
         Student std=getStudentById(id);
         System.out.println("-".repeat(70));
@@ -42,11 +40,9 @@ public class StudentService {
         System.out.println("Devam etmek için Enter'a basın");
         scan.nextLine();
     }
-
     private Student getStudentById(int id) {
         return stRepo.findById(id);
     }
-
     public void updateStudent(int id) {
         Student foundStudent=getStudentById(id);
         if(foundStudent!=null){
