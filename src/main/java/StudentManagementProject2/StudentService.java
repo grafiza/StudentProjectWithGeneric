@@ -1,20 +1,16 @@
 package StudentManagementProject2;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
 public class StudentService implements GenericService{
     Scanner scan = new Scanner(System.in);
     private StudentRepo stRepo = new StudentRepo();
-
-
     @Override
     public void createTable() {
         stRepo.createStudentTable();
     }
-
     @Override
     public void save() {
         System.out.println("Ad:");
@@ -29,7 +25,6 @@ public class StudentService implements GenericService{
         Student std = new Student(name, lastName, city, age);
         stRepo.save(std);
     }
-
     @Override
     public void getAll() {
         List<String> liste=new ArrayList<>();
@@ -43,12 +38,10 @@ public class StudentService implements GenericService{
                     liste.get(i).split(",")[4]);
         }
     }
-
     @Override
     public void delete(int id) {
         stRepo.delete(id);
     }
-
     @Override
     public void display(int id) {
         Student std=getById(id);
@@ -61,7 +54,6 @@ public class StudentService implements GenericService{
         System.out.println("Devam etmek için Enter'a basın");
         scan.nextLine();
     }
-
     @Override
     public void update(int id) {
         Student foundStudent=getById(id);
@@ -82,11 +74,8 @@ public class StudentService implements GenericService{
             stRepo.update(foundStudent);
         }else System.out.println("Öğrenci Bulunamadı");
     }
-
     @Override
     public Student getById(int id) {
         return stRepo.findById(id);
     }
-
-
 }

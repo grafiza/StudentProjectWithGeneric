@@ -1,16 +1,13 @@
 package StudentManagementProject2;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-
 public class TeacherRepo implements Repository<Teacher> {
     DbProcess db = new DbProcess();
     Scanner scan = new Scanner(System.in);
-
     @Override
     public void save(Teacher teacher) {
         db.setConnection();
@@ -34,7 +31,6 @@ public class TeacherRepo implements Repository<Teacher> {
             }
         }
     }
-
     @Override
     public Teacher findById(int id) {
         Teacher teacher = null;
@@ -52,7 +48,6 @@ public class TeacherRepo implements Repository<Teacher> {
                 teacher.setLastname(resultSet.getString("lastname"));
                 teacher.setBranch(resultSet.getString("branch"));
             }
-
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } finally {
@@ -65,7 +60,6 @@ public class TeacherRepo implements Repository<Teacher> {
         }
         return teacher;
     }
-
     @Override
     public List<String> findAll() {
         String query = "Select * from t_teacher1";
@@ -81,7 +75,6 @@ public class TeacherRepo implements Repository<Teacher> {
                         rs.getString("name")+","+
                         rs.getString("lastname")+","+
                         rs.getString("branch"));
-
             }
             System.out.println("-".repeat(40));
         } catch (Exception e) {
@@ -94,10 +87,8 @@ public class TeacherRepo implements Repository<Teacher> {
                 System.out.println(e.getMessage());
             }
         }
-
         return liste;
     }
-
     @Override
     public void update(Teacher teacher) {
         db.setConnection();
@@ -123,7 +114,6 @@ public class TeacherRepo implements Repository<Teacher> {
             }
         }
     }
-
     @Override
     public void delete(int id) {
         db.setConnection();
@@ -150,7 +140,6 @@ public class TeacherRepo implements Repository<Teacher> {
         System.out.println("Devam etmek için bir tuşa basın");
         scan.nextLine();
     }
-
     public void createTeacherTable() {
         db.setConnection();
         db.setStatement();

@@ -4,9 +4,7 @@ import javax.sound.midi.Soundbank;
 import java.util.Scanner;
 
 public class Runner {
-
     public static void main(String[] args) {
-
         Scanner scan = new Scanner(System.in);
         StudentService ss = new StudentService();
         TeacherService ts = new TeacherService();
@@ -26,7 +24,6 @@ public class Runner {
             System.out.println("9. Öğretmen Sil");
             System.out.println("10. Öğretmen Getir");
             System.out.println("0. Çıkış");
-
             select = scan.nextInt();
             scan.nextLine();
             switch (select) {
@@ -75,7 +72,6 @@ public class Runner {
             }
         } while (select != 0);
     }
-
     public static int getId(Scanner scan, String value) {
         System.out.println("İşlem yapmak istediğiniz " + value + " id'si");
         int id = scan.nextInt();

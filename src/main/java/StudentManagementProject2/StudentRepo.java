@@ -1,15 +1,12 @@
 package StudentManagementProject2;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
-
 public class StudentRepo implements Repository<Student> {
     DbProcess db = new DbProcess();
     Scanner scan = new Scanner(System.in);
-
     @Override
     public void save(Student object) {
         db.setConnection();
@@ -34,7 +31,6 @@ public class StudentRepo implements Repository<Student> {
             }
         }
     }
-
     @Override
     public Student findById(int id) {
         Student student = null;
@@ -53,7 +49,6 @@ public class StudentRepo implements Repository<Student> {
                 student.setCity(resultSet.getString("city"));
                 student.setAge(resultSet.getInt("age"));
             }
-
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } finally {
@@ -66,7 +61,6 @@ public class StudentRepo implements Repository<Student> {
         }
         return student;
     }
-
     @Override
     public List<String> findAll() {
         db.setConnection();
@@ -83,10 +77,8 @@ public class StudentRepo implements Repository<Student> {
                         rs.getString("lastname")+","+
                         rs.getString("city")+","+
                         rs.getInt("age"));
-
             }
             System.out.println("-".repeat(50));
-
         } catch (Exception e) {
             System.out.println(e.getMessage());
         } finally {
@@ -97,10 +89,8 @@ public class StudentRepo implements Repository<Student> {
                 System.out.println(e.getMessage());
             }
         }
-
         return liste;
     }
-
     @Override
     public void update(Student foundStudent) {
         db.setConnection();
@@ -127,7 +117,6 @@ public class StudentRepo implements Repository<Student> {
             }
         }
     }
-
     @Override
     public void delete(int id) {
         db.setConnection();
@@ -152,7 +141,6 @@ public class StudentRepo implements Repository<Student> {
             }
         }
     }
-
     public void createStudentTable() {
         db.setConnection();
         db.setStatement();

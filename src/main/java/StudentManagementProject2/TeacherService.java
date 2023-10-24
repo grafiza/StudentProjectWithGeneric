@@ -3,17 +3,13 @@ package StudentManagementProject2;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-
 public class TeacherService implements GenericService{
     Scanner scan = new Scanner(System.in);
     private TeacherRepo teacherRepo = new TeacherRepo();
-
-
     @Override
     public void createTable() {
         teacherRepo.createTeacherTable();
     }
-
     @Override
     public void save() {
         System.out.println("Ad:");
@@ -22,11 +18,9 @@ public class TeacherService implements GenericService{
         String lastName = scan.nextLine().trim();
         System.out.println("Branş:");
         String branch = scan.nextLine().trim();
-
         Teacher teacher = new Teacher(name, lastName, branch);
         teacherRepo.save(teacher);
     }
-
     @Override
     public void getAll() {
         List<String> liste=new ArrayList<>();
@@ -44,7 +38,6 @@ public class TeacherService implements GenericService{
     public void delete(int id) {
         teacherRepo.delete(id);
     }
-
     @Override
     public void display(int id) {
         Teacher teacher=getById(id);
@@ -57,7 +50,6 @@ public class TeacherService implements GenericService{
         System.out.println("Devam etmek için Enter'a basın");
         scan.nextLine();
     }
-
     @Override
     public void update(int id) {
         Teacher foundTeacher=getById(id);
@@ -75,7 +67,6 @@ public class TeacherService implements GenericService{
             teacherRepo.update(foundTeacher);
         }else System.out.println("Öğretmen Bulunamadı");
     }
-
     @Override
     public Teacher getById(int id) {
         return teacherRepo.findById(id);
