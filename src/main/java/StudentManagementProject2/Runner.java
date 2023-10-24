@@ -10,8 +10,8 @@ public class Runner {
         Scanner scan = new Scanner(System.in);
         StudentService ss = new StudentService();
         TeacherService ts = new TeacherService();
-        ss.createStudentTable();
-        ts.createTeacherTable();
+        ss.createTable();
+        ts.createTable();
         int select, id;
         do {
             System.out.println("Okul Yönetim Paneli");
