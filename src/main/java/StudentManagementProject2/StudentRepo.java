@@ -1,7 +1,9 @@
 package StudentManagementProject2;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class StudentRepo implements Repository<Student> {
@@ -66,22 +68,22 @@ public class StudentRepo implements Repository<Student> {
     }
 
     @Override
-    public void findAll() {
+    public List<String> findAll() {
         db.setConnection();
         String query = "Select * from t_student1";
         db.setStatement();
-
+        List<String> liste=new ArrayList<>();
         try {
             ResultSet rs = db.getSt().executeQuery(query);
             System.out.println("-".repeat(50));
             System.out.printf("%-3s %-13s %-13s %-13s %-5s\n", "id", "Adı", "Soyadı", "Şehir", "Yaş");
             while (rs.next()) {
-                System.out.printf("%-3s %-13s %-13s %-13s %-5s\n",
-                        rs.getInt("studentId"),
-                        rs.getString("name"),
-                        rs.getString("lastname"),
-                        rs.getString("city"),
+                liste.add(rs.getInt("studentId")+","+
+                        rs.getString("name")+","+
+                        rs.getString("lastname")+","+
+                        rs.getString("city")+","+
                         rs.getInt("age"));
+
             }
             System.out.println("-".repeat(50));
 
@@ -95,8 +97,8 @@ public class StudentRepo implements Repository<Student> {
                 System.out.println(e.getMessage());
             }
         }
-        System.out.println("Devam etmek için bir tuşa basın");
-        scan.nextLine();
+
+        return liste;
     }
 
     @Override

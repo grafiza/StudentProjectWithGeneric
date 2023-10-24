@@ -3,6 +3,8 @@ package StudentManagementProject2;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class TeacherRepo implements Repository<Teacher> {
@@ -65,20 +67,21 @@ public class TeacherRepo implements Repository<Teacher> {
     }
 
     @Override
-    public void findAll() {
+    public List<String> findAll() {
         String query = "Select * from t_teacher1";
         db.setConnection();
         db.setStatement();
+        List<String> liste=new ArrayList<>();
         try {
             ResultSet rs = db.getSt().executeQuery(query);
             System.out.println("-".repeat(40));
             System.out.printf("%-3s %-13s %-13s %-13s \n", "id", "Adı", "Soyadı", "Branşı");
             while (rs.next()) {
-                System.out.printf("%-3s %-13s %-13s %-13s\n",
-                        rs.getInt("teacherid"),
-                        rs.getString("name"),
-                        rs.getString("lastname"),
+                liste.add(rs.getInt("teacherid")+","+
+                        rs.getString("name")+","+
+                        rs.getString("lastname")+","+
                         rs.getString("branch"));
+
             }
             System.out.println("-".repeat(40));
         } catch (Exception e) {
@@ -91,8 +94,8 @@ public class TeacherRepo implements Repository<Teacher> {
                 System.out.println(e.getMessage());
             }
         }
-        System.out.println("Devam etmek için bir tuşa basın");
-        scan.nextLine();
+
+        return liste;
     }
 
     @Override

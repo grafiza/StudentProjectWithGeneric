@@ -1,15 +1,21 @@
 package StudentManagementProject2;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
-public class TeacherService {
+public class TeacherService implements GenericService{
     Scanner scan = new Scanner(System.in);
     private TeacherRepo teacherRepo = new TeacherRepo();
-    public void createTeacherTable() {
+
+
+    @Override
+    public void createTable() {
         teacherRepo.createTeacherTable();
     }
 
-    public void saveTeacher() {
+    @Override
+    public void save() {
         System.out.println("Ad:");
         String name = scan.nextLine().trim();
         System.out.println("Soyad:");
@@ -21,11 +27,40 @@ public class TeacherService {
         teacherRepo.save(teacher);
     }
 
-    public void getAllTeacher() {
-        teacherRepo.findAll();
+    @Override
+    public void getAll() {
+        List<String> liste=new ArrayList<>();
+        liste=teacherRepo.findAll();
+        for (int i = 0; i <liste.size(); i++) {
+            System.out.printf("%-3s %-13s %-13s %-13s \n",
+                    liste.get(i).split(",")[0],
+                    liste.get(i).split(",")[1],
+                    liste.get(i).split(",")[2],
+                    liste.get(i).split(",")[3]);
+        }
     }
-    public void updateTeacher(int id) {
-        Teacher foundTeacher=getTeacherById(id);
+
+    @Override
+    public void delete(int id) {
+        teacherRepo.delete(id);
+    }
+
+    @Override
+    public void display(int id) {
+        Teacher teacher=getById(id);
+        System.out.println("-".repeat(45));
+        System.out.printf("%-3s %-13s %-13s %-13s\n","id","Adı","Soyadı","Branş");
+        if(teacher!=null){
+            System.out.printf("%-3s %-13s %-13s %-13s\n",teacher.getTeacherId(),teacher.getName(), teacher.getLastname(),teacher.getBranch());
+        }else System.out.println("Öğrenci Bulunamadı");
+        System.out.println("-".repeat(45));
+        System.out.println("Devam etmek için Enter'a basın");
+        scan.nextLine();
+    }
+
+    @Override
+    public void update(int id) {
+        Teacher foundTeacher=getById(id);
         if(foundTeacher!=null){
             System.out.println("Ad:");
             String name = scan.nextLine().trim();
@@ -41,23 +76,8 @@ public class TeacherService {
         }else System.out.println("Öğretmen Bulunamadı");
     }
 
-    public void deleteTeacher(int id) {
-        teacherRepo.delete(id);
-    }
-
-    public void displayTeacher(int id) {
-        Teacher teacher=getTeacherById(id);
-        System.out.println("-".repeat(45));
-        System.out.printf("%-3s %-13s %-13s %-13s\n","id","Adı","Soyadı","Branş");
-        if(teacher!=null){
-            System.out.printf("%-3s %-13s %-13s %-13s\n",teacher.getTeacherId(),teacher.getName(), teacher.getLastname(),teacher.getBranch());
-        }else System.out.println("Öğrenci Bulunamadı");
-        System.out.println("-".repeat(45));
-        System.out.println("Devam etmek için Enter'a basın");
-        scan.nextLine();
-    }
-
-    private Teacher getTeacherById(int id) {
+    @Override
+    public Teacher getById(int id) {
         return teacherRepo.findById(id);
     }
 }
