@@ -31,40 +31,40 @@ public class Runner {
             scan.nextLine();
             switch (select) {
                 case 1:
-                    ss.saveStudent();
+                    ss.save();
                     break;
                 case 2:
-                    ss.getAllStudent();
+                    ss.getAll();
                     break;
                 case 3:
                     id = getId(scan, "Öğrenci");
-                    ss.updateStudent(id);
+                    ss.update(id);
                     break;
                 case 4:
                     id = getId(scan, "Öğrenci");
-                    ss.deleteStudent(id);
+                    ss.delete(id);
                     break;
                 case 5:
                     id = getId(scan, "Öğrenci");
-                    ss.displayStudent(id);
+                    ss.display(id);
                     break;
                 case 6:
-                    ts.saveTeacher();
+                    ts.save();
                     break;
                 case 7:
-                    ts.getAllTeacher();
+                    ts.getAll();
                     break;
                 case 8:
                     id = getId(scan, "Öğretmen");
-                    ts.updateTeacher(id);
+                    ts.update(id);
                     break;
                 case 9:
                     id = getId(scan, "Öğretmen");
-                    ts.deleteTeacher(id);
+                    ts.delete(id);
                     break;
                 case 10:
                     id = getId(scan, "Öğretmen");
-                    ts.displayTeacher(id);
+                    ts.display(id);
                     break;
                 case 0:
                     System.out.println("İyi Günler");
